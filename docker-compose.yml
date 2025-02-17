@@ -1,0 +1,37 @@
+version: '3.8'
+
+volumes:
+  fast_api_data:
+
+networks:
+  fastapi_network:
+
+services:
+  backend_db:
+    image: mariadb:latest
+    container_name: backend_db
+    hostname: backend_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=Welcome-1
+      - MYSQL_DATABASE=testdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - fast_api_data:/var/lib/mysql
+    networks:
+      - fastapi_network
+    restart: always
+
+  backend:
+    image: backend_fastapi:latest
+    build: 
+      context: .
+      dockerfile: ./docker_def/Dockerfile.backend
+    volumes:
+      - .:/app
+    ports:
+      - 8080:80
+    networks:
+      - fastapi_network
+    restart: always
+    

@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pymysql
+SQLAlchemy
+alembic
