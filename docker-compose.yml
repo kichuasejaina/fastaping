@@ -21,6 +21,12 @@ services:
     networks:
       - fastapi_network
     restart: always
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 10s
 
   backend:
     image: backend_fastapi:latest
@@ -36,4 +42,4 @@ services:
     restart: always
     depends_on:
       backend_db:
-        condition: service_started
+        condition: service_healthy
