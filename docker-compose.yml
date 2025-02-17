@@ -34,4 +34,6 @@ services:
     networks:
       - fastapi_network
     restart: always
-    
+    depends_on:
+      backend_db:
+        condition: service_started
