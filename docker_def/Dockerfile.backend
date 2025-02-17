@@ -10,4 +10,4 @@ COPY --from=build /dock_env /dock_env
 VOLUME [ "/app" ]
 WORKDIR "/app"
 EXPOSE 80
-CMD [ "/app/docker_def/entrypoint.bash" ]
+CMD [ "bash", "/app/docker_def/entrypoint.bash" ]
